@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reinux - Potencia tu Talento en la Era Digital</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins e Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Configuración personalizada para Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'petroleo': '#007C80',
+                        'gris-oscuro': '#1F2E35',
+                        'gris-azulado': '#6CA6B2',
+                        'gris-claro': '#F1F3F4',
+                        'celeste-pastel': '#8EE3FD'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Elimina márgenes y rellenos predeterminados del navegador */
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Estilo base para transiciones suaves de los elementos desplegables (FAQ y Semanas) */
+        .collapsible-answer {
+            transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out, padding-top 0.5s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            padding-top: 0;
+        }
+        .collapsible-answer.open {
+            max-height: 9999px; /* Un valor grande para permitir contenido dinámico */
+            opacity: 1;
+            padding-top: 1rem; /* Padding para separar el contenido del título */
+        }
+        .collapsible-arrow {
+            transition: transform 0.3s ease-in-out;
+        }
+        .collapsible-arrow.rotated {
+            transform: rotate(180deg);
+        }
+        /* Ajustes para el contenedor de la imagen de encabezado */
+        .header-bg-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Asegura que la imagen no se desborde */
+            z-index: 0; /* Coloca la imagen de fondo */
+        }
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.05); /* Capa oscura semitransparente - Opacidad reducida */
+            z-index: 1; /* Encima de la imagen */
+        }
+        .header-content {
+            position: relative;
+            z-index: 2; /* Encima de la capa oscura */
+        }
+
+        /* Estilos específicos para los cuadrantes de las semanas */
+        .collapsible-container {
+            transition: all 0.3s ease-in-out;
+            border: 1px solid #e2e8f0; /* Default border */
+        }
+        .collapsible-container.open {
+            border-color: #007C80; /* Petroleo color for active border */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* More pronounced shadow */
+        }
+        .collapsible-question {
+             /* Tailwind's default hover:scale-[1.01] hover:shadow-md */
+            transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+        }
+    </style>
+</head>
+<body class="bg-white font-inter text-gris-oscuro antialiased">
+
+    <!-- 1. Encabezado -->
+    <!-- Se eliminó la clase bg-gris-claro del header para evitar la franja gris superior -->
+    <header id="inicio" class="relative min-h-[500px] flex items-center justify-center text-white">
+        <!-- Contenedor de la imagen de fondo -->
+        <div class="header-bg-container">
+            <img src="https://github.com/juanbls100/reinux/blob/main/Hombre%20maduro%20con%20laptop%20negra.png?raw=true" alt="Hombre maduro con laptop negra" class="w-full h-full object-cover object-center" onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/6CA6B2/FFFFFF?text=Imagen+de+Encabezado';" />
+        </div>
+        <!-- Capa de oscurecimiento sobre la imagen -->
+        <div class="header-overlay"></div>
+
+        <!-- Contenido del encabezado -->
+        <div class="container mx-auto px-6 py-4 md:py-8 header-content">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <!-- Logo principal (más grande) -->
+                <div class="bg-white p-3 rounded-lg shadow-sm mb-4 md:mb-0">
+                    <img src="https://github.com/juanbls100/reinux/blob/main/Logo%20horizontal%20reinux.png?raw=true" alt="Logo de Reinux" class="h-20 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/200x80/007C80/FFFFFF?text=Reinux';" />
+                </div>
+                <!-- Navegación principal -->
+                <nav class="w-full md:w-auto">
+                    <ul class="flex flex-wrap justify-center space-x-4 md:space-x-8 text-white font-semibold">
+                        <li><a href="#beneficios" class="hover:text-celeste-pastel transition-colors duration-200">Beneficios</a></li>
+                        <li><a href="#contenido" class="hover:text-celeste-pastel transition-colors duration-200">Contenido</a></li>
+                        <li><a href="#precio" class="hover:text-celeste-pastel transition-colors duration-200">Precio</a></li>
+                        <li><a href="#contacto" class="hover:text-celeste-pastel transition-colors duration-200">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <div class="text-center pt-8 md:pt-12">
+                <h1 class="text-4xl md:text-6xl font-poppins font-bold leading-tight mb-4 text-white">
+                    Dale un giro digital a tu talento. <br class="hidden md:block"> Sin complicaciones.
+                </h1>
+                <p class="text-lg md:text-xl text-white max-w-3xl mx-auto mb-8">
+                    Nuestro curso te lleva de la mano para que aproveches la tecnología a tu favor, con herramientas gratuitas y fáciles de usar.
+                </p>
+                <a href="#precio" class="bg-petroleo text-white font-bold font-poppins py-4 px-10 rounded-full inline-block shadow-lg hover:bg-opacity-90 transform hover:-translate-y-1 transition-all duration-300">
+                    Quiero inscribirme ahora
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 2. Sección de Identificación -->
+        <section id="para-ti" class="py-16 md:py-24">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-poppins font-bold mb-4">¿Este curso es para ti?</h2>
+                <p class="text-lg text-gris-azulado max-w-2xl mx-auto mb-12">Si respondes "sí" a alguna de estas preguntas, estás en el lugar correcto.</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Pregunta 1 con icono SVG y efecto hover -->
+                    <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200 transform hover:scale-105 hover:shadow-lg transition-all duration-300">
+                        <div class="text-petroleo mb-4 flex justify-center items-center">
+                            <!-- Icono de Velocidad/Progreso -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-10 w-10">
+                                <path d="M12 2c-5.523 0-10 4.477-10 10s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zM11 11V7h2v4h4v2h-4v4h-2v-4H7v-2h4z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-poppins font-semibold text-xl mb-2">¿Sientes que la tecnología avanza muy rápido?</h3>
+                        <p class="text-gris-azulado">Te ayudamos a ponerte al día y a ganar confianza en el entorno digital actual.</p>
+                    </div>
+                    <!-- Pregunta 2 con icono SVG y efecto hover -->
+                    <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200 transform hover:scale-105 hover:shadow-lg transition-all duration-300">
+                        <div class="text-petroleo mb-4 flex justify-center items-center">
+                            <!-- Icono de Negocio/Documento -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-10 w-10">
+                                <path d="M19 3H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2zM5 19V5h14l.002 14H5zm2-8h10v2H7v-2zm0 4h10v2H7v-2zm0-8h10v2H7V7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-poppins font-semibold text-xl mb-2">¿Quieres digitalizar tu negocio o proyecto?</h3>
+                        <p class="text-gris-azulado">Aprende a usar herramientas gratuitas para optimizar tu trabajo sin gastar una fortuna.</p>
+                    </div>
+                    <!-- Pregunta 3 con icono SVG (gráfico ascendente mejorado) y efecto hover -->
+                    <div class="bg-white p-8 rounded-xl shadow-md border border-gray-200 transform hover:scale-105 hover:shadow-lg transition-all duration-300">
+                        <div class="text-petroleo mb-4 flex justify-center items-center">
+                            <!-- Nuevo Icono de Gráfico Ascendente (más definido) -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-10 w-10">
+                                <path d="M2.27 18.39a1 1 0 00.32.74c.2.19.46.3.74.3h17.34a1 1 0 00.74-.32 1 1 0 00.32-.74V5.61a1 1 0 00-.32-.74 1 1 0 00-.74-.32H3.33a1 1 0 00-.74.32 1 1 0 00-.32.74v12.78zM4 6.47h16v11.06L4 6.47zm13.71 4.58l-5.38 5.38-2.6-2.6-5.46 5.46-1.41-1.41 6.87-6.87 2.6-2.6 5.38 5.38z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-poppins font-semibold text-xl mb-2">¿Buscas ser más productivo y eficiente?</h3>
+                        <p class="text-gris-azulado">Descubre cómo la IA y la automatización pueden hacer las tareas repetitivas por ti.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Beneficios -->
+        <section id="beneficios" class="bg-gris-claro py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-poppins font-bold mb-4">Lo que aprenderás a hacer</h2>
+                    <p class="text-lg text-gris-azulado max-w-2xl mx-auto">Te enfocarás en habilidades prácticas que puedes aplicar de inmediato.</p>
+                </div>
+                <div class="max-w-3xl mx-auto">
+                    <ul class="space-y-4">
+                        <li class="flex items-start bg-white p-6 rounded-lg shadow-sm">
+                            <svg class="w-6 h-6 text-petroleo mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div>
+                                <h4 class="font-bold text-lg">Crear formularios profesionales</h4>
+                                <p class="text-gris-azulado">Para registrar clientes, hacer encuestas o recopilar cualquier tipo de información de forma automática.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start bg-white p-6 rounded-lg shadow-sm">
+                            <svg class="w-6 h-6 text-petroleo mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div>
+                                <h4 class="font-bold text-lg">Organizar datos como un experto</h4>
+                                <p class="text-gris-azulado">Usa hojas de cálculo (Google Sheets) para administrar finanzas, inventarios o listas de contactos sin esfuerzo.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start bg-white p-6 rounded-lg shadow-sm">
+                            <svg class="w-6 h-6 text-petroleo mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></path></svg>
+                            <div>
+                                <h4 class="font-bold text-lg">Presentar informes de impacto</h4>
+                                <p class="text-gris-azulado">Transforma datos aburridos en gráficos y paneles visuales (Looker Studio) que todos entiendan.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start bg-white p-6 rounded-lg shadow-sm">
+                            <svg class="w-6 h-6 text-petroleo mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <div>
+                                <h4 class="font-bold text-lg">Automatizar tareas con Inteligencia Artificial</h4>
+                                <p class="text-gris-azulado">Aprende a usar la IA para redactar correos, generar ideas y optimizar tu tiempo de forma sorprendente.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Contenido del curso (Ahora con acordeones mejorados) -->
+        <section id="contenido" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-poppins font-bold mb-4">Un camino claro, semana a semana</h2>
+                    <p class="text-lg text-gris-azulado max-w-2xl mx-auto">Este es el plan de 8 semanas que te convertirá en un experto digital.</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Semana 1 -->
+                    <div class="bg-white rounded-lg shadow-md collapsible-container hover:shadow-xl hover:border-petroleo border border-gray-200">
+                        <button class="collapsible-question w-full flex justify-between items-center text-left p-6 font-semibold text-lg transform transition-all duration-300">
+                            <div>
+                                <p class="font-bold text-petroleo mb-1">Semana 1</p>
+                                <h4 class="font-poppins font-semibold text-lg">Tu Ecosistema Digital con Google</h4>
+                            </div>
+                            <svg class="collapsible-arrow w-6 h-6 text-petroleo flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="collapsible-answer px-6 pb-6 text-gris-azulado">
+                            <p>Exploraremos las herramientas esenciales de Google para optimizar tu trabajo diario: Google Drive, Gmail, Calendar y más. Aprenderás a configurar un entorno digital organizado y eficiente desde cero.</p>
+                        </div>
+                    </div>
+                    <!-- Semana 2 -->
+                    <div class="bg-white rounded-lg shadow-md collapsible-container hover:shadow-xl hover:border-petroleo border border-gray-200">
+                        <button class="collapsible-question w-full flex justify-between items-center text-left p-6 font-semibold text-lg transform transition-all duration-300">
+                            <div>
+                                <p class="font-bold text-petroleo mb-1">Semana 2</p>
+                                <h4 class="font-poppins font-semibold text-lg">Google Forms: Recopila Información sin Límites</h4>
+                            </div>
+                            <svg class="collapsible-arrow w-6 h-6 text-petroleo flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="collapsible-answer px-6 pb-6 text-gris-azulado">
+                            <p>Aprenderás a diseñar formularios interactivos y profesionales para encuestas de satisfacción, registros de eventos, recopilación de datos de clientes y mucho más. Veremos cómo analizar las respuestas de forma sencilla.</p>
+                        </div>
+                    </div>
+                    <!-- Semana 3 -->
+                    <div class="bg-white rounded-lg shadow-md collapsible-container hover:shadow-xl hover:border-petroleo border border-gray-200">
+                        <button class="collapsible-question w-full flex justify-between items-center text-left p-6 font-semibold text-lg transform transition-all duration-300">
+                            <div>
+                                <p class="font-bold text-petroleo mb-1">Semana 3</p>
+                                <h4 class="font-poppins font-semibold text-lg">Google Sheets Básico: Organiza tu Mundo</h4>
+                            </div>
+                            <svg class="collapsible-arrow w-6 h-6 text-petroleo flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="collapsible-answer px-6 pb-6 text-gris-azulado">
+                            <p>Dominarás los fundamentos de Google Sheets para organizar cualquier tipo de datos. Desde listas de tareas y presupuestos hasta pequeños inventarios, aprenderás a usar las funciones básicas para mantener todo en orden.</p>
+                        </div>
+                    </div>
+                    <!-- Semana 4 -->
+                    <div class="bg-white rounded-lg shadow-md collapsible-container hover:shadow-xl hover:border-petroleo border border-gray-200">
+                        <button class="collapsible-question w-full flex justify="justify-between items-center text-left p-6 font-semibold text-lg transform transition-all duration-300">
+                            <div>
+                                <p class="font-bold text-petroleo mb-1">Semana 4</p>
+                                <h4 class="font-poppins font-semibold text-lg">Google Sheets Avanzado: Fórmulas que Trabajan para Ti</h4>
+                            </div>
+                            <svg class="collapsible-arrow w-6 h-6 text-petroleo flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="collapsible-answer px-6 pb-6 text-gris-azulado">
+                            <p>Profundizaremos en fórmulas y funciones avanzadas para automatizar cálculos, buscar información, y generar reportes. Harás que tus hojas de cálculo trabajen por ti, ahorrándote horas de trabajo manual.</p>
+                        </div>
+                    </div>
+                    <!-- Semana 5 -->
+                    <div class="bg-white rounded-lg shadow-md collapsible-container hover:shadow-xl hover:border-petroleo border border-gray-200">
+                        <button class="collapsible-question w-full flex justify-between items-center text-left p-6 font-semibold text-lg transform transition-all duration-300">
+                            <div>
+                                <p class="font-bold text-petroleo mb-1">Semana 5</p>
+                                <h4 class="font-poppins font-semibold text-lg">Looker Studio: Crea Dashboards Impactantes</h4>
+                            </div>
+                            <svg class="collapsible-arrow w-6 h-6 text-petroleo flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="collapsible-answer px-6 pb-6 text-gris-azulado">
+                            <p>Aprende a transformar tus datos de Google Sheets y Forms en visualizaciones atractivas y paneles interactivos con Looker Studio (antes Google Data Studio). Presenta tu información de manera clara y efectiva.</p>
+                        </div>
+                    </div>
+                    <!-- Semana 6 -->
+                    <div class="bg-white rounded-lg shadow-md collapsible-container hover:shadow-xl hover:border-petroleo border border-gray-200">
+                        <button class="collapsible-question w-full flex justify-between items-center text-left p-6 font-semibold text-lg transform transition-all duration-300">
+                            <div>
+                                <p class="font-bold text-petroleo mb-1">Semana 6</p>
+                                <h4 class="font-poppins font-semibold text-lg">Canva: Diseño Gráfico Fácil para No Diseñadores</h4>
+                            </div>
+                            <svg class="collapsible-arrow w-6 h-6 text-petroleo flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="collapsible-answer px-6 pb-6 text-gris-azulado">
+                            <p>Descubre el poder de Canva para crear diseños gráficos profesionales sin necesidad de ser un experto. Diseña presentaciones, publicaciones para redes sociales, infografías y material de marketing de forma intuitiva.</p>
+                        </div>
+                    </div>
+                    <!-- Semana 7 -->
+                    <div class="bg-white rounded-lg shadow-md collapsible-container hover:shadow-xl hover:border-petroleo border border-gray-200">
+                        <button class="collapsible-question w-full flex justify-between items-center text-left p-6 font-semibold text-lg transform transition-all duration-300">
+                            <div>
+                                <p class="font-bold text-petroleo mb-1">Semana 7</p>
+                                <h4 class="font-poppins font-semibold text-lg">Introducción a la IA: Tu Asistente Personal</h4>
+                            </div>
+                            <svg class="collapsible-arrow w-6 h-6 text-petroleo flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="collapsible-answer px-6 pb-6 text-gris-azulado">
+                            <p>Exploraremos cómo la Inteligencia Artificial puede convertirse en tu mejor aliado. Aprenderás a usar herramientas de IA para generar textos, resumir información, idear contenidos y potenciar tu creatividad, optimizando tu tiempo.</p>
+                        </div>
+                    </div>
+                    <!-- Semana 8 -->
+                    <div class="bg-white rounded-lg shadow-md collapsible-container hover:shadow-xl hover:border-petroleo border border-gray-200">
+                        <button class="collapsible-question w-full flex justify-between items-center text-left p-6 font-semibold text-lg transform transition-all duration-300">
+                            <div>
+                                <p class="font-bold text-petroleo mb-1">Semana 8</p>
+                                <h4 class="font-poppins font-semibold text-lg">Proyecto Final: Integrando tus Nuevas Habilidades</h4>
+                            </div>
+                            <svg class="collapsible-arrow w-6 h-6 text-petroleo flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="collapsible-answer px-6 pb-6 text-gris-azulado">
+                            <p>En esta semana, aplicarás todo lo aprendido en un proyecto práctico que te ayudará a consolidar tus habilidades y a ver el impacto real de la digitalización en tu trabajo o negocio.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nueva Sección: Botón Solicita tu Demo -->
+        <section class="bg-white py-10 md:py-16 text-center">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-poppins font-bold text-gris-oscuro mb-8">
+                    ¿Listo para potenciar tu talento?
+                </h2>
+                <a href="#contacto" class="bg-petroleo text-white font-bold font-poppins py-4 px-12 rounded-full inline-block shadow-lg hover:bg-opacity-90 transform hover:-translate-y-1 transition-all duration-300 text-xl">
+                    Solicita tu Demo
+                </a>
+            </div>
+        </section>
+
+        <!-- 5. Testimonios -->
+        <section id="testimonios" class="bg-gris-claro py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-poppins font-bold mb-4">No tienes que creernos a nosotros</h2>
+                    <p class="text-lg text-gris-azulado max-w-2xl mx-auto">Mira lo que dicen nuestros alumnos.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- Testimonio 1 (Placeholder) -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <p class="text-gris-azulado mb-4">"Este curso me quitó el miedo a la tecnología. Ahora administro mi pequeño negocio de forma mucho más eficiente y profesional. ¡Totalmente recomendado!"</p>
+                        <p class="font-bold font-poppins">- Ana G., 52 años, Emprendedora</p>
+                    </div>
+                    <!-- Testimonio 2 (Placeholder) -->
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <p class="text-gris-azulado mb-4">"Pensé que ya sabía usar estas herramientas, pero el curso me enseñó trucos de automatización que me ahorran horas de trabajo a la semana. Increíble."</p>
+                        <p class="font-bold font-poppins">- Carlos M., 31 años, Administrador</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Precio e Inscripción -->
+        <section id="precio" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-2xl p-8 md:p-12 text-center border border-petroleo">
+                    <h2 class="text-3xl md:text-4xl font-poppins font-bold mb-2">Acceso completo al curso</h2>
+                    <p class="text-lg text-gris-azulado mb-6">Un solo pago para transformar tus habilidades para siempre.</p>
+                    <div class="text-5xl md:text-6xl font-poppins font-bold text-petroleo mb-6">
+                        $4999 <span class="text-2xl text-gris-azulado">MXN</span>
+                    </div>
+                    <ul class="text-left max-w-sm mx-auto space-y-2 mb-8 text-gris-azulado">
+                        <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Acceso a clases grabadas</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> 8 módulos de contenido</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Certificado de finalización</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg> Acceso a comunidad privada</li>
+                    </ul>
+                    <a href="#" class="bg-petroleo text-white font-bold font-poppins py-4 px-10 rounded-full inline-block shadow-lg w-full hover:bg-opacity-90 transform hover:-translate-y-1 transition-all duration-300">
+                        Inscribirme y Empezar a Aprender
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Preguntas Frecuentes (FAQ) -->
+        <section id="faq" class="bg-gris-claro py-16 md:py-24">
+            <div class="container mx-auto px-6 max-w-3xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-poppins font-bold mb-4">¿Tienes dudas?</h2>
+                    <p class="text-lg text-gris-azulado">Aquí resolvemos las más comunes.</p>
+                </div>
+                <div class="space-y-4">
+                    <!-- Pregunta 1 -->
+                    <div class="bg-white rounded-lg shadow-sm collapsible-container">
+                        <button class="collapsible-question w-full flex justify-between items-center text-left p-6 font-semibold text-lg">
+                            <span>¿Necesito tener experiencia previa?</span>
+                            <svg class="collapsible-arrow w-6 h-6 text-petroleo flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="collapsible-answer px-6 pb-6 text-gris-azulado">
+                            <p>No, en absoluto. El curso está diseñado desde cero, pensando en personas que tienen conocimientos básicos o nulos. Te guiaremos paso a paso.</p>
+                        </div>
+                    </div>
+                    <!-- Pregunta 2 -->
+                    <div class="bg-white rounded-lg shadow-sm collapsible-container">
+                        <button class="collapsible-question w-full flex justify-between items-center text-left p-6 font-semibold text-lg">
+                            <span>¿Las herramientas que se usan son de pago?</span>
+                            <svg class="collapsible-arrow w-6 h-6 text-petroleo flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="collapsible-answer px-6 pb-6 text-gris-azulado">
+                            <p>No. Nos enfocamos exclusivamente en herramientas poderosas y gratuitas como las de Google (Forms, Sheets, Looker Studio), Canva y versiones de IA de libre acceso. No tendrás que gastar nada extra.</p>
+                        </div>
+                    </div>
+                    <!-- Pregunta 3 -->
+                    <div class="bg-white rounded-lg shadow-sm collapsible-container">
+                        <button class="collapsible-question w-full flex justify-between items-center text-left p-6 font-semibold text-lg">
+                            <span>¿Cuánto tiempo tengo para completar el curso?</span>
+                            <svg class="collapsible-arrow w-6 h-6 text-petroleo flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="collapsible-answer px-6 pb-6 text-gris-azulado">
+                            <p>El acceso es de por vida. Aunque el contenido está estructurado en 8 semanas, puedes tomarte todo el tiempo que necesites y volver a consultar las lecciones cuando quieras.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Formulario de Contacto -->
+        <section id="contacto" class="py-16 md:py-24">
+            <div class="container mx-auto px-6 max-w-2xl">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-poppins font-bold mb-4">¿Algo más en qué podamos ayudarte?</h2>
+                    <p class="text-lg text-gris-azulado">Envíanos un mensaje y te responderemos lo antes posible.</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gris-claro">
+                    <form action="#" method="POST" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gris-oscuro mb-2">Tu Nombre</label>
+                            <input type="text" id="name" name="name" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-petroleo focus:border-petroleo" placeholder="Escribe tu nombre completo" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gris-oscuro mb-2">Tu Correo Electrónico</label>
+                            <input type="email" id="email" name="email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-petroleo focus:border-petroleo" placeholder="ejemplo@correo.com" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gris-oscuro mb-2">Tu Mensaje</label>
+                            <textarea id="message" name="message" rows="5" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-petroleo focus:border-petroleo" placeholder="Escribe tu consulta aquí..." required></textarea>
+                        </div>
+                        <button type="submit" class="bg-petroleo text-white font-bold font-poppins py-3 px-8 rounded-full inline-block shadow-lg w-full hover:bg-opacity-90 transform hover:-translate-y-1 transition-all duration-300">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de Página -->
+    <footer class="bg-gris-oscuro py-12">
+        <div class="container mx-auto px-6 text-center text-white">
+            <!-- Nuevo Logo en el pie de página -->
+            <div class="inline-block mb-8">
+                <img src="https://github.com/juanbls100/reinux/blob/main/Untitled%20(1000%20x%20500%20px).png?raw=true" alt="Nuevo Logo de Reinux" class="h-16 w-auto" onerror="this.onerror=null;this.src='https://placehold.co/200x60/007C80/FFFFFF?text=Nuevo+Logo';" />
+            </div>
+            <p class="text-gris-claro mb-4">Potenciando tu talento en la era digital.</p>
+            <p class="text-sm text-gris-azulado">&copy; 2024 Reinux. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // JavaScript para los elementos desplegables (FAQ y Semanas)
+            const collapsibleQuestions = document.querySelectorAll('.collapsible-question');
+
+            collapsibleQuestions.forEach(button => {
+                button.addEventListener('click', () => {
+                    const answer = button.nextElementSibling;
+                    const arrow = button.querySelector('.collapsible-arrow');
+                    const parentContainer = button.closest('.collapsible-container'); 
+
+                    // Si la respuesta ya está abierta, ciérrala
+                    if (answer.classList.contains('open')) {
+                        answer.classList.remove('open');
+                        arrow.classList.remove('rotated');
+                        parentContainer.classList.remove('open'); 
+                    } else {
+                        // Cierra otras respuestas abiertas del mismo grupo (para que solo una esté abierta a la vez)
+                        // Para las preguntas de la sección "Contenido del curso"
+                        document.querySelectorAll('#contenido .collapsible-container').forEach(otherContainer => {
+                            const otherButton = otherContainer.querySelector('.collapsible-question');
+                            if (otherContainer !== parentContainer && otherButton) {
+                                const otherAnswer = otherButton.nextElementSibling;
+                                const otherArrow = otherButton.querySelector('.collapsible-arrow');
+                                if (otherAnswer && otherAnswer.classList.contains('open')) {
+                                    otherAnswer.classList.remove('open');
+                                    otherArrow.classList.remove('rotated');
+                                    otherContainer.classList.remove('open');
+                                }
+                            }
+                        });
+                        // Para las preguntas de la sección "FAQ"
+                        document.querySelectorAll('#faq .collapsible-container').forEach(otherContainer => {
+                            const otherButton = otherContainer.querySelector('.collapsible-question');
+                            if (otherContainer !== parentContainer && otherButton) {
+                                const otherAnswer = otherButton.nextElementSibling;
+                                const otherArrow = otherButton.querySelector('.collapsible-arrow');
+                                if (otherAnswer && otherAnswer.classList.contains('open')) {
+                                    otherAnswer.classList.remove('open');
+                                    otherArrow.classList.remove('rotated');
+                                    otherContainer.classList.remove('open');
+                                }
+                            }
+                        });
+
+                        // Abre la respuesta actual
+                        answer.classList.add('open');
+                        arrow.classList.add('rotated');
+                        parentContainer.classList.add('open'); 
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
